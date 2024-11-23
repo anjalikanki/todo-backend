@@ -102,6 +102,10 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+import dj_database_url
+import os
+DATABASES["default"]=dj_database_url.parse(os.environ.get("DB_HOST"))
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
