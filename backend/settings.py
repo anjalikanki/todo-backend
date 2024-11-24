@@ -93,18 +93,25 @@ WSGI_APPLICATION = "backend.wsgi.application"
 from decouple import config
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todo_list_0eex',
-        'USER': 'todo_list_0eex_user',
-        'PASSWORD': 'DZA7BexaRqpOwfgD43TSB69VyldBUFea',
-        'HOST': 'dpg-ct13t80gph6c73bflnd0-a.oregon-postgres.render.com',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
 import dj_database_url
 import os
-DATABASES["default"]=dj_database_url.parse(os.environ.get("DB_HOST"))
+
+
+DATABASES = {}
+
+
+db_url = os.environ.get("DB_HOST")
+if not db_url:
+    raise ValueError("The DB_HOST environment variable is not set.")
+
+DATABASES["default"] = dj_database_url.parse(db_url)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
