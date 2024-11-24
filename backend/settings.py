@@ -102,15 +102,16 @@ DATABASES = {
 import dj_database_url
 import os
 
-
 DATABASES = {}
-
 
 db_url = os.environ.get("DB_HOST")
 if not db_url:
-    raise ValueError("The DB_HOST environment variable is not set.")
+    raise ValueError("The DB_HOST environment variable is not set. Please set it before running the application.")
 
 DATABASES["default"] = dj_database_url.parse(db_url)
+
+
+
 
 
 # Password validation
